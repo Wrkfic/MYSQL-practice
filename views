@@ -1,0 +1,80 @@
+create database DB;
+use DB;
+create table employee(
+empID int not null, 
+empName varchar(20) not null, 
+empCity varchar(20), 
+empSalary int, 
+empAge int, 
+empDept varchar(20),
+primary key(empID)
+);
+insert into employee value(1, 'Rohit', 'Ranchi', 80000, 32, 'Cricket');
+insert into employee value(2, 'Kholi', 'Pune', 100000, 31, 'Cricket');
+insert into employee value(3, 'Dhoni', 'Ranchi', 120000, 44, 'Cricket');
+select * from employee;
+update employee
+set empAge=46
+where empID=3;
+select * from employee where empCity='Ranchi';
+select distinct empCity from employee;
+select * from employee where not empCity='Ranchi';
+update employee
+set empCity='Mumbai'
+where empID=1;
+select * from employee;
+select count(distinct empCity) from employee;
+select max(empSalary) from employee;
+select * from employee where not empSalary>100000;
+select * from employee order by empAge;
+alter table employee
+add column empEmail varchar(30);
+select * from employee;
+alter table employee
+drop column empEmail;
+select * from employee;
+create table employee1(
+empID int not null, 
+empName varchar(20) not null, 
+empCity varchar(20), 
+empSalary int, 
+empAge int, 
+empDept varchar(20),
+primary key(empID)
+);
+select * from employee1;
+insert into employee1 value(1, 'Anuj', 'Surat', 10000, 20, 'IT');
+insert into employee1 value(2, 'Biju', 'Mumbai', 25000, 20, 'CS');
+insert into employee1 value(3, 'Rohit', 'Nandurbar', 15000, 20,'CS');
+select * from employee1;
+select * from employee1 order by empSalary desc;
+drop table employee1;
+alter table employee
+add column empEmail varchar(30);
+create table Emails(id int, empEmail varchar(30), primary key(id));
+insert into Emails value(1, 'Rohitsharma@gmail.com');
+update employee
+set empEmail=1
+where empID=1;
+select * from employee;
+select empID,empName,empCity,empDept,empSalary,emails.empEmail from employee
+inner join Emails
+on employee.empEmail = Emails.id;
+select * from employee;
+select empID,empName,empCity,empDept,empSalary,emails.empEmail from employee
+left join emails
+on employee.empEmail = emails.id;
+select * from employee where empName like'r%';
+select *from employee where empSalary between 60000 and 110000;
+insert into Emails value(2, 'Viratkholi@gmail.com');
+insert into Emails value(3, 'MSDhoni@gmail.com');
+update employee
+set empEmail=2
+where empID=2;
+update employee
+set empEmail=3
+where empID=3;
+select empID, empName, empAge, empCity, empDept, empSalary, emails.empEmail
+from employee 
+left join emails
+on employee.empEmail = emails.id;
